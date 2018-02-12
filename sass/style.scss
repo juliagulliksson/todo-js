@@ -1,0 +1,5 @@
+@import "_mobile.scss";
+
+@media screen and (min-width: 900px){
+    @import "_desktop.scss";
+}
