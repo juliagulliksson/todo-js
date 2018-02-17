@@ -5,22 +5,42 @@ body{
     box-sizing: border-box;
 }
 
-form{
+.input-wrapper{
+    height: 30px;
+    width: 80%;
+    margin: 0 auto;
     input{
-        border-radius: 4px;
+        padding: 0;
+        margin-top: -10px;
+        border-top-left-radius: 4px;
+        border-bottom-left-radius: 4px;
         border: 0px;
         background-color: #edeff4;
-        height: 30px;
-        width: 90%;
+        //height: 30px;
+        width: 75%;
         font-size: 1em;
         font-family: 'Open Sans', sans-serif;
         outline: 0;
-        padding: 5px;
+        padding: 8px;
         color: #1b8d82;
     }
     input::placeholder {
         color:#1b8d82;
-      }
+    }
+    button{
+        padding: 0;
+        margin: 0;
+         font-size: 1em;
+        width: 20%;
+        padding: 10px;
+        background-color: #1b8d82;
+        color: #FFF; 
+        margin-left: -5px;
+        border-top-right-radius: 4px;
+        border-bottom-right-radius: 4px;
+        outline: 0;
+        border: 0;
+    }
 }
 
 .wrapper{
@@ -52,16 +72,22 @@ h2{
     
 }
 
-.hidden{
-    //display: none;
+.todo-wrapper{
+    border-top: 1px solid #7cbbb6;
 }
 
-.todo-wrapper{
+
+.todo-wrapper, .completed-wrapper{
     margin: 0px auto;
     margin-top: 30px;
     width: 75%;
-    border-top: 1px solid #7cbbb6;
 }
+
+.completed-todos{
+    text-decoration: line-through;
+}
+
+
 
 ul {
     text-align: left;
@@ -90,22 +116,31 @@ ul {
     float: right;
     cursor: pointer;
     font-size: 1.3em;
+    opacity: 0;
 }
 
-.fa-minus-circle{
+.fa.fa-minus-circle{
     @extend %fa-icons;
     color: rgb(161, 8, 8);
 }
 
-.fa-check-circle{
+.fa.fa-check-circle{
     @extend %fa-icons;
     color: rgb(7, 104, 7);
-    margin-right: 20px;
+    margin-right: 20px; 
 }
+
+/*.fa-check-circle:hover{
+    opacity: 1;
+}
+
+.fa-minus-circle:hover{
+    opacity: 1;
+}*/
 
 .error{
     color: rgb(145, 11, 11);
-    font-weight: bold;
+    font-weight: 700;
 }
 
 
