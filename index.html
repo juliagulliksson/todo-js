@@ -7,7 +7,6 @@
     <link href="css/style.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Dekko" rel="stylesheet">
-    <script src="https://use.fontawesome.com/81bfe91082.js"></script>
     <title>Todo List</title>
 </head>
 <body>
@@ -17,22 +16,23 @@
 
         <div class="form-wrapper" id="formWrapper">
 
-            <h1 id="heading">What's on your mind?</h1>
+            <h1 id="heading">Todo List</h1>
 
             <form id="todoForm">
                 <div class="input-wrapper">
-                    <input type="text" id="todoInput" placeholder="Enter a new to do here..." autocomplete="off">
+                    <input type="text" id="todoInput" placeholder="Enter a new todo here..." autocomplete="off">
                     <button id="button">Add</button>
                 </div>
               
             </form>
+            <div id="errorContainer"></div>
 
         </div>
 
         <div id="todoOutput" class="todo-wrapper">
 
 
-            <ul id="uncompletedList">
+            <ul id="inCompletedList">
                
         
             </ul>

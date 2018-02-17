@@ -1,75 +1,66 @@
 const form = document.getElementById('todoForm');
-const uncompletedList = document.getElementById('uncompletedList');
+const inCompletedList = document.getElementById('inCompletedList');
 const input = document.getElementById('todoInput');
 const formWrapper = document.getElementById('formWrapper');
 const submitButton = document.getElementById('button');
-
+const errorContainer = document.getElementById('errorContainer');
 const completedList = document.getElementById('completedList');
 
+// Add a label to the checkbox, make it possible to delete all todos, add animations
+//Local storage, not same todo possible
+
 form.addEventListener('submit', function(event){
-
     event.preventDefault();
-
-    addTodo();
-
-   
+    addTodo();   
 });
 
-
-function createNewTodo(inputValue){
-    //const inputValue = form.querySelector('input[type="text"]').value;
-    
+function createNewTodo(inputValue){ 
     // Create the li tag and apply the input text
     const listItem = document.createElement("li");
     listItem.textContent = inputValue;
 
-    //Create the two clickable icons
-    const deleteIcon = document.createElement('i');
-    deleteIcon.classList.add('fa', 'fa-minus-circle');
-    deleteIcon.title = "Remove item";
-    listItem.appendChild(deleteIcon);
-    const checkIcon = document.createElement('i');
-    checkIcon.classList.add('fa', 'fa-check-circle');
-    checkIcon.title = "Mark as done";
-    listItem.appendChild(checkIcon);
-   
-    console.log("adding");
-    return listItem;
+    //Create the delete Icon
+    const deleteButton = document.createElement('button');
+    deleteButton.classList.add('delete');
+    deleteButton.textContent = "Delete";
+    listItem.appendChild(deleteButton);
+    const checkBox = document.createElement('input');
+    checkBox.type = 'checkbox';
+    listItem.appendChild(checkBox);
 
+    return listItem;
 }
 
 function addTodo(){
-    const listItem = createNewTodo(input.value);
-    uncompletedList.appendChild(listItem);
-    connectTodoEvents(listItem);
-
-    //Reset the value of the input
-    input.value = "";
-
+    const validate = validateForm();
+    if (validate == true) {
+        // Run the function to create a new todo
+        const listItem = createNewTodo(input.value);
+        // Add the new todo to the uncompleted list
+        inCompletedList.appendChild(listItem);
+        // Connect the event listeners to new todo
+        connectTodoEvents(listItem);
+        // Reset the value of the input
+        input.value = "";
+    } else {
+        input.value = "";
+    }
 }
 
-for(i = 0; i < uncompletedList.children.length; i++){
-
-    checkIcon.addEventListener('click', function(){
-        
-
-        //Remove the list item
-        //this.parentElement.removeChild(this);
-        const listItem = this.parentNode;
-        completedList.appendChild(listItem);
-        
-        //todoCompletedDiv.appendChild(this);
-        
-        //uncompletedList.removeChild(this);
-        
-       
-    });
+function validateForm(){
+    const inputValue = input.value;
+    if (inputValue.length > 40) {
+        const errorText = document.createElement('span');
+        errorText.classList.add('error');
+        errorText.textContent = "Too much to do, too little space";
+        errorContainer.appendChild(errorText);
+        return false;
+    } else if (!inputValue.replace(/^\s+/g, '').length) { //Input field is empty
+        return false;
+    } else {
+        return true;
+    }
 }
-
-
-
-
-const uncompletedItems = document.querySelectorAll('#uncompletedList li');
 
 function deleteTodo(){
     const listItem = this.parentNode;
@@ -77,53 +68,42 @@ function deleteTodo(){
 }
 
 function markAsComplete(){
-    const listItem = this.parentNode;
-    listItem.classList.add('completed-todos');
+
+    if (this.checked) {
+        console.log("hello");
+        const listItem = this.parentNode;
+        listItem.classList.add('completed-todos');
     
-    var checkIcon = listItem.querySelector('i.fa-check-circle');
-    checkIcon.parentNode.removeChild(checkIcon);
-    completedList.appendChild(listItem);
-    connectTodoEvents(listItem);
+        completedList.appendChild(listItem);
+    } else {
+        const listItem = this.parentNode;
+        listItem.classList.remove('completed-todos');
+        inCompletedList.appendChild(listItem);
+    }
 }
 
 function connectTodoEvents(listItem){
     
-    const checkIcon = listItem.querySelector('i.fa-check-circle');
-    console.log(checkIcon);
-    const deleteIcon = listItem.querySelector("i.fa-minus-circle");
+    const checkBox = listItem.querySelector('input[type=checkbox]');
+    const deleteButton = listItem.querySelector('button.delete');
 
-    checkIcon.addEventListener('click', markAsComplete);
-    deleteIcon.addEventListener('click', deleteTodo);
-
-    for(i = 0; i < uncompletedList.children.length; i++){
-
-        uncompletedList.children[i].addEventListener('mouseover', function(){
-    
-            var checkIcon = this.querySelector('i.fa-check-circle');
-            var deleteIcon = this.querySelector('i.fa-minus-circle');
-            deleteIcon.style.opacity = '0.8';
-            checkIcon.style.opacity = '0.8';
-        });
-    }
-
-    for(i = 0; i < uncompletedList.children.length; i++){
-
-        uncompletedList.children[i].addEventListener('mouseleave', function(){
-            var checkIcon = this.querySelector('i.fa-check-circle');
-            var deleteIcon = this.querySelector('i.fa-minus-circle');
-            deleteIcon.style.opacity = '0';
-            checkIcon.style.opacity = '0';
-            
-        });
-    }
-
+    // Connect the checkbox to the function depending on if it's unmarked or not
+    checkBox.addEventListener('change', markAsComplete);
+    // Connect the delete button to the delete function
+    deleteButton.addEventListener('click', deleteTodo);
 }
 
-for(let i = 0; i < uncompletedList.children.length; i++) {
+/*for(let i = 0; i < inCompletedList.children.length; i++) {
     console.log("hej");
-    // bind events to list item's children (taskCompleted)
-  connectTodoEvents(uncompletedList.children[i]);
+    
+  connectTodoEvents(inCompletedList.children[i], markAsComplete);
 }
+
+for(let i = 0; i < completedList.children.length; i++) {
+    console.log("hej");
+    
+  connectTodoEvents(completedList.children[i], markAsInComplete);
+}*/
 
 
 
