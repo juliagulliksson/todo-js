@@ -5,6 +5,8 @@ body{
     box-sizing: border-box;
 }
 
+/*** Extends ***/
+
 %button{
     padding: 0;
     margin: 0;
@@ -20,6 +22,8 @@ body{
     font-weight: 400;
     color: $green;
 }
+
+/*** Form ***/
 
 .input-wrapper{
     height: 30px;
@@ -43,18 +47,31 @@ body{
         color: $turquoise;
     }
     
-   button{
-       @extend %button;
-       border-top-right-radius: 4px;
-       border-bottom-right-radius: 4px;
-       margin-left: -5px;
-       width: 20%;
-       font-size: 1em;
-       padding: 10px;
-       background-color: $turquoise;
+    button{
+        @extend %button;
+        border-top-right-radius: 4px;
+        border-bottom-right-radius: 4px;
+        margin-left: -5px;
+        width: 20%;
+        font-size: 1em;
+        padding: 10px;
+        background-color: $turquoise;
+        transition: all 400ms;
+   }
+   button:active{
+        background-color: #136860;
    }
 }
 
+#errorContainer{
+    margin-top: 20px;
+    .error{
+        color: rgb(145, 11, 11);
+        font-weight: 700;
+    }
+}
+
+/** List items-wrapper **/
 
 .wrapper{
     padding: 20px;
@@ -66,8 +83,6 @@ body{
     box-shadow: 3px 3px 5px rgb(214, 211, 211);
 }
 
-
-
 h1{
     @extend %heading;
     font-size: 2em;
@@ -76,13 +91,12 @@ h1{
 h2{
     @extend %heading;
     font-size: 1.5em;
-    
+    opacity: 0;
 }
 
 .todo-wrapper{
     border-top: 1px solid #7cbbb6;
 }
-
 
 .todo-wrapper, .completed-wrapper{
     margin: 0px auto;
@@ -94,9 +108,7 @@ h2{
     text-decoration: line-through;
 }
 
-
-
-ul {
+ul{
     text-align: left;
     margin: 0;
     padding: 0;
@@ -118,17 +130,14 @@ ul {
     }
 }
 
-/** Delete and check buttons*/
-
-
+/** Delete, Clear All and check buttons*/
 
 input[type=checkbox] {
     float: right;
     margin-top: 6px;
     cursor: pointer;
-  }
+}
   
-
 .delete{
     @extend %button;
     float: right;
@@ -136,6 +145,11 @@ input[type=checkbox] {
     padding: 5px;
     margin-left: 7px;
     background-color: $turquoise;
+    transition: all 400ms;
+}
+
+.delete:active{
+    background-color: #136860;
 }
 
 .clear-all{
@@ -147,29 +161,22 @@ input[type=checkbox] {
     display: block;
     background-color: #b75073;
     opacity: 1;
+    transition: all 400ms;
+}
+
+.clear-all:active{
+    background-color: #813851;
 }
 
 .clear{
     clear: both;
 }
 
-#errorContainer{
-    margin-top: 20px;
-    .error{
-        color: rgb(145, 11, 11);
-        font-weight: 700;
-        //opacity: 0;
-    }
-   
-}
-
 .hidden{
     display: none;
 }
 
-span{
-    opacity: 0;
-}
+/*** Animations ***/
 
 .fadeIn {
     -webkit-animation: fadeIn 400ms;
