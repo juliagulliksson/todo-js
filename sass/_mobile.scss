@@ -8,10 +8,10 @@ body{
 %button{
     padding: 0;
     margin: 0;
-    background-color: $turquoise;
     color: #FFF; 
     outline: 0;
     border: 0;
+    cursor: pointer;
 }
 
 %heading{
@@ -51,6 +51,7 @@ body{
        width: 20%;
        font-size: 1em;
        padding: 10px;
+       background-color: $turquoise;
    }
 }
 
@@ -102,6 +103,8 @@ ul {
     li{
         list-style-type: none;
         padding: 10px;
+        opacity: 0;
+        transition: all 400ms;
     }
     li:hover{
         background-color:#edeff4;
@@ -131,8 +134,23 @@ input[type=checkbox] {
     float: right;
     border-radius: 4px;
     padding: 5px;
-    cursor: pointer;
     margin-left: 7px;
+    background-color: $turquoise;
+}
+
+.clear-all{
+    @extend %button;
+    float: right;
+    border-radius: 4px;
+    padding: 7px;
+    margin: 10px;
+    display: block;
+    background-color: #b75073;
+    opacity: 1;
+}
+
+.clear{
+    clear: both;
 }
 
 #errorContainer{
@@ -140,8 +158,27 @@ input[type=checkbox] {
     .error{
         color: rgb(145, 11, 11);
         font-weight: 700;
+        //opacity: 0;
     }
+   
 }
 
+.hidden{
+    display: none;
+}
 
+span{
+    opacity: 0;
+}
 
+.fadeIn {
+    -webkit-animation: fadeIn 400ms;
+    animation: fadeIn 400ms;
+    opacity: 1;
+ }
+
+ .fadeOut {
+    -webkit-animation: fadeOut 400ms;
+    animation: fadeOut 400ms;
+    opacity: 0;
+ }
